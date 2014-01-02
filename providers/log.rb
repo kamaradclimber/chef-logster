@@ -14,6 +14,8 @@ action :add do
 
     o = options.map{|k,v| "#{k}=#{v}"}.join(" ")
 
+    o = "#{o} #{new_resource.options}" if new_resource.options
+
     cron "logster #{new_resource.log_file.gsub(/\//, '_')}" do
         command "/usr/bin/logster #{o} #{new_resource.parser} '#{Shellwords.escape(new_resource.log_file)}'"
         minute "*/#{new_resource.frequency}"
