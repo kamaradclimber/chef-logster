@@ -7,7 +7,7 @@ else
 end
 
 git 'logster' do
-    repository "https://github.com/etsy/logster.git"
+    repository node[:logster][:repository]
     destination "/var/tmp/logster"
     reference node[:logster][:version]
     notifies :run, 'execute[create logster]'
